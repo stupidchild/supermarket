@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xinba.supermarket.dao.SupermarketGoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.xinba.supermarket.entity.SupermarketGoods" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="supermarket_id" property="supermarketId" jdbcType="INTEGER" />
+    <result column="supermarket_name" property="supermarketName" jdbcType="VARCHAR" />
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="retail_price" property="retailPrice" jdbcType="DECIMAL" />
+    <result column="goods_number" property="goodsNumber" jdbcType="INTEGER" />
+    <result column="sell_volume" property="sellVolume" jdbcType="INTEGER" />
+    <result column="is_hot" property="isHot" jdbcType="BIT" />
+    <result column="is_on_sale" property="isOnSale" jdbcType="BIT" />
+    <result column="add_time" property="addTime" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.xinba.supermarket.entity.SupermarketGoods" extends="BaseResultMap" >
+    <result column="goods_desc" property="goodsDesc" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, supermarket_id, supermarket_name, goods_id, goods_name, retail_price, goods_number, 
+    sell_volume, is_hot, is_on_sale, add_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    goods_desc
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from nideshop_supermarket_goods
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from nideshop_supermarket_goods
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xinba.supermarket.entity.SupermarketGoods" >
+    insert into nideshop_supermarket_goods (id, supermarket_id, supermarket_name, 
+      goods_id, goods_name, retail_price, 
+      goods_number, sell_volume, is_hot, 
+      is_on_sale, add_time, goods_desc
+      )
+    values (#{id,jdbcType=INTEGER}, #{supermarketId,jdbcType=INTEGER}, #{supermarketName,jdbcType=VARCHAR}, 
+      #{goodsId,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, #{retailPrice,jdbcType=DECIMAL}, 
+      #{goodsNumber,jdbcType=INTEGER}, #{sellVolume,jdbcType=INTEGER}, #{isHot,jdbcType=BIT}, 
+      #{isOnSale,jdbcType=BIT}, #{addTime,jdbcType=INTEGER}, #{goodsDesc,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xinba.supermarket.entity.SupermarketGoods" >
+    insert into nideshop_supermarket_goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="supermarketId != null" >
+        supermarket_id,
+      </if>
+      <if test="supermarketName != null" >
+        supermarket_name,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="goodsName != null" >
+        goods_name,
+      </if>
+      <if test="retailPrice != null" >
+        retail_price,
+      </if>
+      <if test="goodsNumber != null" >
+        goods_number,
+      </if>
+      <if test="sellVolume != null" >
+        sell_volume,
+      </if>
+      <if test="isHot != null" >
+        is_hot,
+      </if>
+      <if test="isOnSale != null" >
+        is_on_sale,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="goodsDesc != null" >
+        goods_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="supermarketId != null" >
+        #{supermarketId,jdbcType=INTEGER},
+      </if>
+      <if test="supermarketName != null" >
+        #{supermarketName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsName != null" >
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="retailPrice != null" >
+        #{retailPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsNumber != null" >
+        #{goodsNumber,jdbcType=INTEGER},
+      </if>
+      <if test="sellVolume != null" >
+        #{sellVolume,jdbcType=INTEGER},
+      </if>
+      <if test="isHot != null" >
+        #{isHot,jdbcType=BIT},
+      </if>
+      <if test="isOnSale != null" >
+        #{isOnSale,jdbcType=BIT},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=INTEGER},
+      </if>
+      <if test="goodsDesc != null" >
+        #{goodsDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xinba.supermarket.entity.SupermarketGoods" >
+    update nideshop_supermarket_goods
+    <set >
+      <if test="supermarketId != null" >
+        supermarket_id = #{supermarketId,jdbcType=INTEGER},
+      </if>
+      <if test="supermarketName != null" >
+        supermarket_name = #{supermarketName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsName != null" >
+        goods_name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="retailPrice != null" >
+        retail_price = #{retailPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsNumber != null" >
+        goods_number = #{goodsNumber,jdbcType=INTEGER},
+      </if>
+      <if test="sellVolume != null" >
+        sell_volume = #{sellVolume,jdbcType=INTEGER},
+      </if>
+      <if test="isHot != null" >
+        is_hot = #{isHot,jdbcType=BIT},
+      </if>
+      <if test="isOnSale != null" >
+        is_on_sale = #{isOnSale,jdbcType=BIT},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=INTEGER},
+      </if>
+      <if test="goodsDesc != null" >
+        goods_desc = #{goodsDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xinba.supermarket.entity.SupermarketGoods" >
+    update nideshop_supermarket_goods
+    set supermarket_id = #{supermarketId,jdbcType=INTEGER},
+      supermarket_name = #{supermarketName,jdbcType=VARCHAR},
+      goods_id = #{goodsId,jdbcType=INTEGER},
+      goods_name = #{goodsName,jdbcType=VARCHAR},
+      retail_price = #{retailPrice,jdbcType=DECIMAL},
+      goods_number = #{goodsNumber,jdbcType=INTEGER},
+      sell_volume = #{sellVolume,jdbcType=INTEGER},
+      is_hot = #{isHot,jdbcType=BIT},
+      is_on_sale = #{isOnSale,jdbcType=BIT},
+      add_time = #{addTime,jdbcType=INTEGER},
+      goods_desc = #{goodsDesc,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xinba.supermarket.entity.SupermarketGoods" >
+    update nideshop_supermarket_goods
+    set supermarket_id = #{supermarketId,jdbcType=INTEGER},
+      supermarket_name = #{supermarketName,jdbcType=VARCHAR},
+      goods_id = #{goodsId,jdbcType=INTEGER},
+      goods_name = #{goodsName,jdbcType=VARCHAR},
+      retail_price = #{retailPrice,jdbcType=DECIMAL},
+      goods_number = #{goodsNumber,jdbcType=INTEGER},
+      sell_volume = #{sellVolume,jdbcType=INTEGER},
+      is_hot = #{isHot,jdbcType=BIT},
+      is_on_sale = #{isOnSale,jdbcType=BIT},
+      add_time = #{addTime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
