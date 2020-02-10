@@ -20,13 +20,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int insert(User user) {
-        return userMapper.insert(user);
-    }
-
-    @Override
-    public int update(User user) {
-        return userMapper.updateByPrimaryKey(user);
+    public int save(User user) {
+        if (user.getId() == 0) {
+            return userMapper.insert(user);
+        } else {
+            return userMapper.updateByPrimaryKey(user);
+        }
     }
 
     @Override

@@ -8,9 +8,7 @@ public interface UserService {
 
     User queryById(int id);
 
-    int insert(User user);
-
-    int update(User user);
+    int save(User user);
 
     Pagination<User> selectByPage(UserRequestParam param);
 }

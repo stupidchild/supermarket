@@ -438,4 +438,63 @@
       supermarket_id = #{supermarketId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+
+  <select id="queryCount" resultType="java.lang.Integer" parameterType="com.xinba.supermarket.controller.request.GoodsRequestParam" >
+    select
+    count(*)
+    from nideshop_goods
+    where 1=1
+    <if test="goods.id != null" >
+      and id = #{goods.id,jdbcType=VARCHAR}
+    </if>
+    <if test="goods.name != null" >
+      and name = #{goods.name,jdbcType=VARCHAR}
+    </if>
+    <if test="goods.keywords != null" >
+      and keywords = #{goods.keywords,jdbcType=VARCHAR}
+    </if>
+    <if test="goods.supermarketId != null" >
+      and supermarketId = #{goods.supermarketId}
+    </if>
+    <if test="goods.isDelete != null" >
+      and is_delete = #{goods.isDelete,jdbcType=VARCHAR}
+    </if>
+    <if test="addTimeBegin != null" >
+      and add_time &gt;= #{addTimeBegin}
+    </if>
+    <if test="addTimeEnd != null" >
+      and add_time &lt;= #{addTimeEnd}
+    </if>
+  </select>
+
+  <select id="selectByParam" resultMap="BaseResultMap" parameterType="com.xinba.supermarket.controller.request.GoodsRequestParam" >
+    select
+    <include refid="Base_Column_List" />
+    from nideshop_goods
+    where 1=1
+    <if test="goods.id != null" >
+      and id = #{goods.id,jdbcType=VARCHAR}
+    </if>
+    <if test="goods.name != null" >
+      and name = #{goods.name,jdbcType=VARCHAR}
+    </if>
+    <if test="goods.keywords != null" >
+      and keywords = #{goods.keywords,jdbcType=VARCHAR}
+    </if>
+    <if test="goods.supermarketId != null" >
+      and supermarket_id = #{goods.supermarketId}
+    </if>
+    <if test="goods.isDelete != null" >
+      and is_delete = #{goods.isDelete,jdbcType=VARCHAR}
+    </if>
+    <if test="addTimeBegin != null" >
+      and add_time &gt;= #{addTimeBegin}
+    </if>
+    <if test="addTimeEnd != null" >
+      and add_time &lt;= #{addTimeEnd}
+    </if>
+    order by add_time desc limit #{begin} , #{size}
+  </select>
 </mapper>

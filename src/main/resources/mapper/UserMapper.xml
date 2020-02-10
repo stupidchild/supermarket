@@ -226,13 +226,50 @@
     select
     count(*)
     from nideshop_user
-    where id = #{user.id,jdbcType=INTEGER}
+    where 1=1
+    <if test="user.id != null" >
+      and id = #{user.id,jdbcType=VARCHAR}
+    </if>
+    <if test="user.username != null" >
+      and username = #{user.username,jdbcType=VARCHAR}
+    </if>
+    <if test="user.mobile != null" >
+      and mobile = #{user.mobile,jdbcType=VARCHAR}
+    </if>
+    <if test="user.gender != null" >
+      and gender = #{user.gender,jdbcType=VARCHAR}
+    </if>
+    <if test="createTimeBegin != null" >
+      and createTime &gt;= #{createTimeBegin}
+    </if>
+    <if test="createTimeEnd != null" >
+      and createTime &lt;= #{createTimeEnd}
+    </if>
   </select>
 
   <select id="selectByParam" resultMap="BaseResultMap" parameterType="com.xinba.supermarket.controller.request.UserRequestParam" >
     select
     <include refid="Base_Column_List" />
     from nideshop_user
-    where id = #{user.id,jdbcType=INTEGER}
+    where 1=1
+    <if test="user.id != null" >
+      and id = #{user.id,jdbcType=VARCHAR}
+    </if>
+    <if test="user.username != null" >
+      and username = #{user.username,jdbcType=VARCHAR}
+    </if>
+    <if test="user.mobile != null" >
+      and mobile = #{user.mobile,jdbcType=VARCHAR}
+    </if>
+    <if test="user.gender != null" >
+      and gender = #{user.gender,jdbcType=VARCHAR}
+    </if>
+    <if test="createTimeBegin != null" >
+      and createTime &gt;= #{createTimeBegin}
+    </if>
+    <if test="createTimeEnd != null" >
+      and createTime &lt;= #{createTimeEnd}
+    </if>
+    order by create_time desc limit #{begin} , #{size}
   </select>
 </mapper>

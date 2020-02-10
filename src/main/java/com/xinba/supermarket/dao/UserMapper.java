@@ -1,6 +1,5 @@
 package com.xinba.supermarket.dao;
 
-import com.xinba.supermarket.common.Pagination;
 import com.xinba.supermarket.controller.request.UserRequestParam;
 import com.xinba.supermarket.entity.User;
 import org.apache.ibatis.annotations.Mapper;
