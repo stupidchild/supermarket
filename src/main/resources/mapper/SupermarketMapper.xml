@@ -103,4 +103,44 @@
       link_man = #{linkMan,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+  <select id="queryCount" resultType="java.lang.Integer" parameterType="com.xinba.supermarket.controller.request.SuperMarketRequestParam" >
+    select
+    count(*)
+    from nideshop_supermarket
+    where 1=1
+    <if test="supermarket.id != null" >
+      and id = #{supermarket.id,jdbcType=VARCHAR}
+    </if>
+    <if test="supermarket.name != null" >
+      and name like CONCAT('%',#{supermarket.name},'%')
+    </if>
+    <if test="supermarket.phone != null" >
+      and phone = #{supermarket.phone}
+    </if>
+    <if test="supermarket.address != null" >
+      and address = #{supermarket.address}
+    </if>
+  </select>
+
+  <select id="selectByParam" resultMap="BaseResultMap" parameterType="com.xinba.supermarket.controller.request.SuperMarketRequestParam" >
+    select
+    <include refid="Base_Column_List" />
+    from nideshop_supermarket
+    where 1=1
+    <if test="supermarket.id != null" >
+      and id = #{supermarket.id,jdbcType=VARCHAR}
+    </if>
+    <if test="supermarket.name != null" >
+      and name like CONCAT('%',#{supermarket.name},'%')
+    </if>
+    <if test="supermarket.phone != null" >
+      and phone = #{supermarket.phone}
+    </if>
+    <if test="supermarket.address != null" >
+      and address = #{supermarket.address}
+    </if>
+    limit #{begin} , #{size}
+  </select>
 </mapper>

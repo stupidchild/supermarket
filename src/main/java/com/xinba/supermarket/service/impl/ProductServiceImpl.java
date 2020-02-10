@@ -33,7 +33,7 @@ public class ProductServiceImpl implements ProductService {
         Pagination pagination = new Pagination();
         int count = productMapper.queryCount(param);
         if (count == 0) {
-            return null;
+            return pagination;
         }
         pagination.setTotal(count);
         pagination.setData(productMapper.selectByParam(param));

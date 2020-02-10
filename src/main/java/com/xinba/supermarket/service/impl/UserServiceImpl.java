@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
         Pagination pagination = new Pagination();
         int count = userMapper.queryCount(param);
         if (count == 0) {
-            return null;
+            return pagination;
         }
         pagination.setTotal(count);
         pagination.setData(userMapper.selectByParam(param));

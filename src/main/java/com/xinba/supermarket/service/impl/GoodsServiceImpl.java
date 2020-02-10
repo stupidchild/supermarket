@@ -33,7 +33,7 @@ public class GoodsServiceImpl implements GoodsService {
         Pagination pagination = new Pagination();
         int count = goodsMapper.queryCount(param);
         if (count == 0) {
-            return null;
+            return pagination;
         }
         pagination.setTotal(count);
         pagination.setData(goodsMapper.selectByParam(param));
